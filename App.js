@@ -13,7 +13,7 @@
 import React from 'react';
 import {View} from 'react-native'
 import {NavigationContainer} from '@react-navigation/native';
-import LoginScreen from "./Apps/Containers/LoginScreen/LoginScreen"
+import AddTodoScreen from "./Apps/Containers/AddTodo/AddTodoScreen"
 
 
 import { createStackNavigator } from "@react-navigation/stack";
@@ -25,7 +25,7 @@ import { Provider } from 'react-redux';
 import store from './Apps/Redux/Store/store';
 
 
-import Todo from './Apps/Containers/Todo'
+import Todo from './Apps/Containers/Todo';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -41,7 +41,7 @@ function AuthStacks() {
             initialRouteName="Todo"
         >
             <AuthStack.Screen name="Todo" component={Todo} />
-            <AuthStack.Screen name="LoginScreen" component={LoginScreen} />
+            <AuthStack.Screen name="AddTodoScreen" component={AddTodoScreen} />
         </AuthStack.Navigator>
     );
 }

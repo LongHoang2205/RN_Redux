@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import LoginReducer  from './LoginReducer'
+import AddTodoReducer  from './AddTodoReducer'
 
 export default combineReducers({
-    login: LoginReducer
+    addTodo: AddTodoReducer
+
 });

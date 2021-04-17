@@ -13,6 +13,7 @@ export default StyleSheet.create({
     },
     input:{
         borderBottomWidth:1,
-        borderColor:Colors.white
+        borderColor:Colors.white,
+        height:50
     }
 })
