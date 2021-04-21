@@ -7,10 +7,13 @@ import styles from "./Styles/TDIconButtonStyle";
 // theme
 import { Images, Metrics, Colors } from "../../../Themes";
 
-export default function TDIconButton({ onPressButton, btn, img }) {
+export default function TDIconButton({ onPressButton, btnStyle, imgSource }) {
   return (
-    <TouchableOpacity style={[styles.buttonIcons, btn]} onPress={onPressButton}>
-      <Image source={img} style={styles.icons} />
+    <TouchableOpacity
+      style={[styles.buttonIcons, btnStyle]}
+      onPress={onPressButton}
+    >
+      <Image source={imgSource} style={styles.icons} />
     </TouchableOpacity>
   );
 }

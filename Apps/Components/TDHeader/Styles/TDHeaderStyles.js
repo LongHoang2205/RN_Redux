@@ -6,24 +6,25 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.safeArea,
   },
-  head: {
+  header: {
     alignItems: "center",
-    height: 70,
-    justifyContent: "center",
+    height: 60,
+    justifyContent: "space-between",
     flexDirection: "row",
+    backgroundColor: Colors.pinkLight,
+    marginHorizontal: 20,
+    borderRadius: 20,
   },
   textHead: {
-    fontSize: Metrics.h5,
-    color: Colors.white,
+    fontSize: Metrics.h2,
+    color: Colors.background,
     fontWeight: "bold",
   },
   icons: {
     width: 20,
     height: 20,
   },
-  buttonIcons: {
-    width: 50,
-    height: 50,
+  iconButton: {
     justifyContent: "center",
     alignItems: "center",
   },

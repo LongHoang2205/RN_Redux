@@ -6,16 +6,17 @@ import styles from "./Styles/TDTextInputStyle";
 
 class TDTextInput extends Component {
   render() {
-    const { placeholder, onChangeText, title } = this.props;
+    const { placeholder, onChangeText, title, value } = this.props;
 
     return (
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <TextInput
           placeholder={placeholder}
-          placeholderTextColor="white"
+          placeholderTextColor="gray"
           style={styles.input}
           onChangeText={(text) => onChangeText(text)}
+          value={value}
         />
       </View>
     );

@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Text, View, ScrollView, SafeAreaView } from "react-native";
+import {
+  Text,
+  View,
+  ScrollView,
+  SafeAreaView,
+  KeyboardType,
+} from "react-native";
 
 // styles
 import styles from "../../../styles";
@@ -9,25 +15,31 @@ import { TDTextInput, TDHeader, TDIconButton } from "../../Components";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { addTodo } from "../../Redux/Actions/index";
+import { addTodo, editTodo } from "../../Redux/Actions/index";
 
 // themes
 import { Images, Colors, Metrics } from "../../Themes";
 
-function AddTodoScreen({ navigation }) {
-  const onPressBack = () => {
-    navigation.goBack();
-  };
+function AddTodoScreen({ route, navigation }) {
+  // param tu navigation chuc nang edit
+  const titleHeader = route?.params?.title;
+  const item = route?.params?.item;
 
   const dispatch = useDispatch();
-
   const addTodoState = useSelector((state) => state);
-
-  const [taskNameInput, setTaskNameInput] = useState("");
-  const [descriptionInput, setDescriptionInput] = useState("");
+  const [taskNameInput, setTaskNameInput] = useState(
+    titleHeader ? item.taskName : ""
+  );
 
   const addTodoPress = () => {
-    dispatch(addTodo({ taskName: "task 1", description: "description ne" }));
+    // them task vi, them task ko truyen param title
+    // nen titleheader se undentifi (false)
+    if (!titleHeader) {
+      const taskName = taskNameInput ? taskNameInput : "task has not name";
+      dispatch(addTodo({ taskName: taskName, description: "description ne" }));
+    } else {
+      dispatch(editTodo({ item, taskName: taskNameInput }));
+    }
     navigation.goBack();
   };
 
@@ -35,40 +47,29 @@ function AddTodoScreen({ navigation }) {
     setTaskNameInput(text);
   };
 
-  const onChangeTextDescription = (text) => {
-    setDescriptionInput(text);
+  const onPressBack = () => {
+    navigation.goBack();
   };
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.safeArea}></SafeAreaView>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <View
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "row",
-          }}
-        >
-          <View style={{ position: "absolute", left: 20 }}>
-            <TDIconButton img={Images.delete} onPressButton={addTodoPress} />
-          </View>
-          <TDHeader title={"Add Todo"} />
-          <View style={{ position: "absolute", right: 20 }}>
-            <TDIconButton img={Images.submit} onPressButton={addTodoPress} />
-          </View>
-        </View>
-        <TDTextInput
-          title={"TaskName"}
-          onChangeText={(text) => onChangeTextTaskName(text)}
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.contentContainer}>
+        <TDHeader
+          title={titleHeader ? titleHeader : "Add new task"}
+          rightIconPress={addTodoPress}
+          rightIconSource={titleHeader ? Images.save : Images.add}
+          titleStyle={styles.titleheaderAddNewTask}
+          leftIconPress={onPressBack}
+          leftIconSource={Images.back}
         />
         <TDTextInput
+          placeholder={"add your task name"}
           title={"Description"}
-          onChangeText={(text) => onChangeTextDescription(text)}
+          onChangeText={(text) => onChangeTextTaskName(text)}
+          value={taskNameInput}
         />
-        <TDIconButton img={Images.back} onPressButton={onPressBack} />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
