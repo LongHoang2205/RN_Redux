@@ -10,7 +10,7 @@ import { Images } from "../../Themes";
 // comonents
 import { TDIconButton } from "../TDButton";
 
-function TDTodoListItem(item, index, onPessItem, onPessDelete) {
+function TDTodoListItem(item, index, onPressDelete, onPressUpdate) {
   return (
     <TouchableOpacity
       style={{
@@ -21,7 +21,6 @@ function TDTodoListItem(item, index, onPessItem, onPessDelete) {
         marginBottom: 10,
         flexDirection: "row",
       }}
-      onPress={() => onPessItem(item)}
     >
       <View style={{ flex: 1, justifyContent: "center" }}>
         <Text style={{ fontWeight: "bold", fontSize: 20 }}>
@@ -31,7 +30,11 @@ function TDTodoListItem(item, index, onPessItem, onPessDelete) {
       </View>
       <TDIconButton
         imgSource={Images.delete}
-        onPressButton={() => onPessDelete(item)}
+        onPressButton={() => onPressDelete(item)}
+      />
+      <TDIconButton
+        imgSource={Images.update}
+        onPressButton={() => onPressUpdate(item)}
       />
     </TouchableOpacity>
   );

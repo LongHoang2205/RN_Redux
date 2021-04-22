@@ -4,6 +4,8 @@ const images = {
   back: require("../Images/icons/left-arrow.png"),
   submit: require("../Images/icons/check.png"),
   save: require("../Images/icons/save.png"),
+  update: require("../Images/icons/refresh.png"),
+  user: require("../Images/icons/user.png"),
 };
 
 export default images;

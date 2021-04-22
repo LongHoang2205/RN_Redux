@@ -30,21 +30,37 @@ function AddTodoScreen({ route, navigation }) {
   const [taskNameInput, setTaskNameInput] = useState(
     titleHeader ? item.taskName : ""
   );
+  const [descriptionInput, setDescriptionInput] = useState(
+    titleHeader ? item.description : ""
+  );
 
   const addTodoPress = () => {
     // them task vi, them task ko truyen param title
     // nen titleheader se undentifi (false)
     if (!titleHeader) {
       const taskName = taskNameInput ? taskNameInput : "task has not name";
-      dispatch(addTodo({ taskName: taskName, description: "description ne" }));
+      dispatch(
+        addTodo({ taskName: taskNameInput, description: descriptionInput })
+      );
     } else {
-      dispatch(editTodo({ item, taskName: taskNameInput }));
+      dispatch(
+        editTodo({
+          item,
+          taskName: taskNameInput,
+          description: descriptionInput,
+        })
+      );
     }
+
     navigation.goBack();
   };
 
   const onChangeTextTaskName = (text) => {
     setTaskNameInput(text);
+  };
+
+  const onChangeTextDescription = (text) => {
+    setDescriptionInput(text);
   };
 
   const onPressBack = () => {
@@ -55,7 +71,7 @@ function AddTodoScreen({ route, navigation }) {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.contentContainer}>
         <TDHeader
-          title={titleHeader ? titleHeader : "Add new task"}
+          title={"Add new task"}
           rightIconPress={addTodoPress}
           rightIconSource={titleHeader ? Images.save : Images.add}
           titleStyle={styles.titleheaderAddNewTask}
@@ -64,9 +80,15 @@ function AddTodoScreen({ route, navigation }) {
         />
         <TDTextInput
           placeholder={"add your task name"}
-          title={"Description"}
+          title={"Name"}
           onChangeText={(text) => onChangeTextTaskName(text)}
           value={taskNameInput}
+        />
+        <TDTextInput
+          placeholder={"add your description"}
+          title={"Description"}
+          onChangeText={(text) => onChangeTextDescription(text)}
+          value={descriptionInput}
         />
       </ScrollView>
     </SafeAreaView>

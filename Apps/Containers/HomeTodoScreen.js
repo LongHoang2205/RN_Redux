@@ -29,14 +29,17 @@ function Todo({ navigation }) {
     navigation.navigate("AddTodoScreen");
   };
 
-  const onPessDelete = (item) => {
+  const onPressDelete = (item) => {
     dispatch(removeTodo({ item }));
   };
 
-  const onPessItemList = (item) => {
-    navigation.navigate("AddTodoScreen", { title: "Edit todo", item });
+  const onPressUpdate = (item) => {
+    navigation.navigate("AddTodoScreen", { title: "Edit Todo", item });
   };
 
+  const onPressMoveUser = (item) => {
+    navigation.navigate("UserScreen", { title: "User Profile", item });
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.contentContainer}>
@@ -45,12 +48,14 @@ function Todo({ navigation }) {
           rightIconPress={onPressMove}
           rightIconSource={Images.add}
           titleStyle={styles.titleheader}
+          leftIconPress={onPressMoveUser}
+          leftIconSource={Images.user}
         />
         {/* Luon them key cho flatlist (key khong duoc trung nhau) */}
         <FlatList
           data={todoListInStore}
           renderItem={({ item, index }) =>
-            TDTodoListItem(item, index, onPessItemList, onPessDelete)
+            TDTodoListItem(item, index, onPressDelete, onPressUpdate)
           }
           keyExtractor={(item, index) => item.id + index}
           style={styles.listContainer}

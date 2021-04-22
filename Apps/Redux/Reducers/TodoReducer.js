@@ -1,18 +1,7 @@
 import { ADD_TODO, REMOVE_TODO, EDIT_TODO } from "../Actions/type";
 
 const initialState = {
-  tasks: [
-    {
-      id: 1,
-      taskName: "init task",
-      description: "new init task",
-    },
-    {
-      id: 2,
-      taskName: "task 2 quet nha",
-      description: "ko quet nha, ma ve danh chet",
-    },
-  ],
+  tasks: [],
 };
 
 export default function (tasks = initialState, action) {
@@ -30,23 +19,25 @@ export default function (tasks = initialState, action) {
         tasks: newTask,
       };
     case REMOVE_TODO:
-      const itemIdRemove = action.payload.item.id;
-      const removeFilterList = newTask.filter((x) => {
-        if (x.id !== itemIdRemove) {
+      const removeId = action.payload.item.id;
+      const removeTodoList = newTask.filter((x) => {
+        if (x.id !== removeId) {
           return x;
         }
       });
       return {
-        tasks: removeFilterList,
+        tasks: removeTodoList,
       };
     case EDIT_TODO:
       const itemIdEdit = action.payload.item.id;
-      const titleEdit = action.payload.taskName;
+      const taskNameEdit = action.payload.taskName;
+      const descriptionEdit = action.payload.description;
       const editMapList = newTask.map((item) => {
         if (item.id === itemIdEdit) {
           return {
             ...item,
-            taskName: titleEdit,
+            taskName: taskNameEdit,
+            description: descriptionEdit,
           };
         } else {
           return item;
