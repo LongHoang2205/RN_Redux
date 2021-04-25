@@ -1,5 +1,5 @@
 import { StyleSheet, Platform, StatusBar } from "react-native";
-import { Metrics, Images, Colors } from "../Themes";
+import { Metrics, Images, Colors } from "../../../Themes";
 
 export default StyleSheet.create({
   container: {
@@ -62,14 +62,12 @@ export default StyleSheet.create({
     color: "#aeaeae",
   },
   header: {
-    flex: 1,
+    backgroundColor: "white",
   },
   footer: {
-    flex: 1,
-    position: "absolute",
-    bottom: 30,
     flexDirection: "row",
     alignItems: "center",
+    backgroundColor: "white",
   },
   leftFooter: {
     left: 10,
@@ -78,7 +76,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginHorizontal: 20,
-    backgroundColor: "#c7c7c7",
+    backgroundColor: "white",
     borderRadius: 20,
     width: 220,
     height: 50,

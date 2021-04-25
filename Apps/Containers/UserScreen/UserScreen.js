@@ -9,17 +9,17 @@ import {
 } from "react-native";
 
 // styles
-import styles from "../Containers/UserStyle";
+import styles from "./Styles/UserStyle";
 
 // components
-import { TDTextInput, TDHeader, TDIconButton } from "../Components";
+import { TDTextInput, TDHeader, TDIconButton } from "../../Components";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { editUser } from "../Redux/Actions/index";
+import { editUser } from "../../Redux/Actions/index";
 
 // themes
-import { Images, Colors, Metrics } from "../Themes";
+import { Images, Colors, Metrics } from "../../Themes";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 function UserScreen({ route, navigation }) {
@@ -116,7 +116,7 @@ function UserScreen({ route, navigation }) {
                 style={{ width: 40, height: 40, justifyContent: "center" }}
               >
                 <Image
-                  source={require("../Images/icons/camera.png")}
+                  source={require("../../Images/icons/camera.png")}
                   style={{
                     width: 20,
                     height: 20,

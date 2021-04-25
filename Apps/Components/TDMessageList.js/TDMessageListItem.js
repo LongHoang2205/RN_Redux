@@ -5,13 +5,14 @@ import { View, Text, TouchableOpacity } from "react-native";
 import styles from "../../../styles";
 
 // themes
-import { Images } from "../../Themes";
+import { Images, Colors } from "../../Themes";
 
 // comonents
 import { TDIconButton } from "../TDButton";
 
 function TDMessageListItem(item, index, onPressDelete, onPressUpdate) {
-  return (
+  const userName = item?.username;
+  return userName === "me" ? (
     <TouchableOpacity
       style={{
         backgroundColor: "pink",
@@ -19,9 +20,25 @@ function TDMessageListItem(item, index, onPressDelete, onPressUpdate) {
         borderRadius: 20,
         padding: 20,
         marginBottom: 10,
+        marginRight: 90,
+        alignSelf: "flex-start",
       }}
     >
-      <Text>Hi Henna, how you</Text>
+      <Text>{item.messageContent}</Text>
+    </TouchableOpacity>
+  ) : (
+    <TouchableOpacity
+      style={{
+        backgroundColor: Colors.blueLight,
+        marginHorizontal: 20,
+        borderRadius: 20,
+        padding: 20,
+        marginBottom: 10,
+        marginLeft: 90,
+        alignSelf: "flex-end",
+      }}
+    >
+      <Text>{item.messageContent}</Text>
     </TouchableOpacity>
   );
 }

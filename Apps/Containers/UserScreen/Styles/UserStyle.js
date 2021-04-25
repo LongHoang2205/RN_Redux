@@ -1,5 +1,5 @@
 import { StyleSheet, Platform, StatusBar } from "react-native";
-import { Metrics, Images, Colors } from "../Themes";
+import { Metrics, Images, Colors } from "../../../Themes";
 
 export default StyleSheet.create({
   container: {

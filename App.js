@@ -10,8 +10,8 @@ import store from "./Apps/Redux/Store/store";
 // Screen
 import HomeTodoScreen from "./Apps/Containers/HomeTodoScreen";
 import AddTodoScreen from "./Apps/Containers/AddTodoScreen/AddTodoScreen";
-import UserScreen from "./Apps/Containers/UserScreen";
-import MessageScreen from "./Apps/Containers/MessageScreen";
+import UserScreen from "./Apps/Containers/UserScreen/UserScreen";
+import MessageScreen from "./Apps/Containers/MessageScreen/MessageScreen";
 
 const Tab = createMaterialTopTabNavigator();
 
