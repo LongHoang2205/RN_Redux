@@ -34,6 +34,7 @@ function AddTodoScreen({ route, navigation }) {
     titleHeader ? item.description : ""
   );
 
+  console.log(">>>", item);
   const addTodoPress = () => {
     // them task vi, them task ko truyen param title
     // nen titleheader se undentifi (false)

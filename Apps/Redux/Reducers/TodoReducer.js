@@ -29,6 +29,7 @@ export default function (tasks = initialState, action) {
         tasks: removeTodoList,
       };
     case EDIT_TODO:
+      console.log("edit todo", action.payload);
       const itemIdEdit = action.payload.item.id;
       const taskNameEdit = action.payload.taskName;
       const descriptionEdit = action.payload.description;

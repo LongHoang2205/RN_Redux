@@ -1,7 +1,12 @@
-import { MESSAGE } from "./type";
+import { ADD_MESSAGE, EDIT_MESSAGE } from "./type";
 
-// users
-export const message = (payload) => ({
-  type: MESSAGE,
+// messages
+export const addMessage = (payload) => ({
+  type: ADD_MESSAGE,
+  payload,
+});
+
+export const editMessage = (payload) => ({
+  type: EDIT_MESSAGE,
   payload,
 });

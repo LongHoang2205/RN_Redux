@@ -7,4 +7,5 @@ export const EDIT_TODO = "EDIT_TODO";
 export const EDIT_USER = "EDIT_USER";
 
 //message
-export const MESSAGE = "MESSAGE";
+export const ADD_MESSAGE = "ADD_MESSAGE";
+export const EDIT_MESSAGE = "EDIT_MESSAGE";

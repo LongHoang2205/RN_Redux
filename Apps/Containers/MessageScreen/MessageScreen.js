@@ -14,56 +14,48 @@ import { TDTextInput, TDHeader, TDIconButton } from "../../Components";
 import TDIconButtonStyle from "../../Components/TDButton/TDIconButton/Styles/TDIconButtonStyle";
 import { TDMessageListItem } from "../../Components/TDMessageList.js/index.js";
 
+import { addMessage, editMessage } from "../../Redux/Actions/index";
 //styles
 import styles from "./Styles/MessageStyle";
+
+//redux
+import { useSelector, useDispatch } from "react-redux";
 
 //themes
 import { Images, Colors, Metrics } from "../../Themes";
 
-const userMessageList = [
-  {
-    id: 1,
-    username: "you",
-    messageContent: "Hello, co gi dui hong",
-  },
-  {
-    id: 2,
-    username: "me",
-    messageContent: "Hello, hong co gi dui",
-  },
-  {
-    id: 3,
-    username: "you",
-    messageContent: "eeee",
-  },
-  {
-    id: 4,
-    username: "you",
-    messageContent: "an com chua",
-  },
-  {
-    id: 5,
-    username: "me",
-    messageContent: "roi ak",
-  },
-];
-
 function MessageScreen({ navigation, route }) {
-  const [message, setMessage] = useState("");
-  const [listMessage, setListMessage] = useState(userMessageList);
+  // const [listMessage, setListMessage] = useState(userMessageList);
+  const dispatch = useDispatch();
+  //const item = route?.params?.item;
+  const userState = useSelector((state) => state.message);
+  const messageData = userState.addMessage;
+  const [message, setMessage] = useState(messageData?.messageContent);
+  const [isEditMessage, setIsEditMessage] = useState(false);
 
   const onChangeMessage = (text) => {
     setMessage(text);
   };
 
-  const sendMessage = () => {
-    listMessage.push({
-      id: userMessageList.length + 1,
-      username: "me",
-      messageContent: message,
-    });
-    setMessage("");
-    Keyboard.dismiss();
+  const onPressSend = () => {
+    if (isEditMessage) {
+      dispatch(editMessage({ messageData, messageContent: message }));
+    } else {
+      dispatch(addMessage({ messageContent: message }));
+    }
+  };
+
+  const onPressItem = (item) => {
+    // console.log(item);
+    setIsEditMessage(true);
+    setMessage(item.messageContent);
+  };
+
+  const onPressRightHeaderIcon = () => {
+    if (isEditMessage) {
+      setIsEditMessage(false);
+      setMessage();
+    }
   };
 
   const onPressBack = () => {
@@ -92,19 +84,26 @@ function MessageScreen({ navigation, route }) {
             />
           </View>
           <View style={styles.center}>
-            <Text style={styles.name}>Henna Beck</Text>
+            <Text style={styles.name}>
+              {isEditMessage ? "Edit message" : "Send message"}
+            </Text>
             <Text style={styles.status}>online</Text>
           </View>
           <View style={styles.right}>
             <TDIconButton imgSource={Images.phone} />
-            <TDIconButton imgSource={Images.search} />
+            <TDIconButton
+              onPressButton={onPressRightHeaderIcon}
+              imgSource={isEditMessage ? Images.delete : Images.search}
+            />
           </View>
         </View>
       </View>
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <FlatList
-          data={listMessage}
-          renderItem={({ item, index }) => TDMessageListItem(item, index)}
+          data={messageData}
+          renderItem={({ item, index }) =>
+            TDMessageListItem(item, index, onPressItem)
+          }
           keyExtractor={(item, index) => item.id + index}
         />
       </ScrollView>
@@ -119,10 +118,13 @@ function MessageScreen({ navigation, route }) {
             onChangeText={(text) => onChangeMessage(text)}
             value={message}
           />
-          <TDIconButton imgSource={Images.sticker} />
+          <TDIconButton
+            imgSource={Images.sticker}
+            onPressButton={onPressSend}
+          />
         </View>
         <View style={styles.rightFooter}>
-          <TDIconButton imgSource={Images.micro} onPressButton={sendMessage} />
+          <TDIconButton imgSource={Images.micro} />
         </View>
       </View>
     </SafeAreaView>

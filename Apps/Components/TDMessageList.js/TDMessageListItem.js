@@ -10,10 +10,11 @@ import { Images, Colors } from "../../Themes";
 // comonents
 import { TDIconButton } from "../TDButton";
 
-function TDMessageListItem(item, index, onPressDelete, onPressUpdate) {
+function TDMessageListItem(item, index, onPressItem, onPressUpdate) {
   const userName = item?.username;
   return userName === "me" ? (
     <TouchableOpacity
+      onPress={() => onPressItem(item)}
       style={{
         backgroundColor: "pink",
         marginHorizontal: 20,
@@ -28,6 +29,7 @@ function TDMessageListItem(item, index, onPressDelete, onPressUpdate) {
     </TouchableOpacity>
   ) : (
     <TouchableOpacity
+      onPress={() => onPressItem(item)}
       style={{
         backgroundColor: Colors.blueLight,
         marginHorizontal: 20,
