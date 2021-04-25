@@ -1,21 +1,7 @@
-import { user } from "../Actions";
-import {
-  ADD_TODO,
-  REMOVE_TODO,
-  EDIT_TODO,
-  USER,
-  EDIT_USER,
-} from "../Actions/type";
+import { ADD_TODO, REMOVE_TODO, EDIT_TODO } from "../Actions/type";
 
 const initialState = {
   tasks: [],
-  user: {
-    userName: "Hoang Vu Long",
-    email: "hoangvulong2205@gmail.com",
-    phone: "0123456789",
-    gender: "Male",
-    birthday: "01-01-2021",
-  },
 };
 
 export default function (tasks = initialState, action) {
@@ -59,30 +45,6 @@ export default function (tasks = initialState, action) {
       });
       return {
         tasks: editMapList,
-      };
-    case USER:
-      const userDescription = [...tasks.user];
-      return {
-        // userName: tasks.user.userName,
-        // email: tasks.user.email,
-        // phone: tasks.user.phone,
-        // gender: tasks.user.gender,
-        // birthday: tasks.user.userName,
-        userDescription,
-      };
-    case EDIT_USER:
-      const userName = tasks.user.userName;
-      const email = tasks.user.email;
-      const phone = tasks.user.phone;
-      const gender = tasks.user.gender;
-      const birthday = tasks.user.birthday;
-      return {
-        ...user,
-        userName: userName,
-        email: email,
-        phone: phone,
-        gender: gender,
-        birthday: birthday,
       };
     default:
       return tasks;

@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import AddTodoReducer from "./TodoReducer";
+import TodoReducer from "./TodoReducer";
+import UserReducer from "./UserReducer";
 
 export default combineReducers({
-  todo: AddTodoReducer,
+  todo: TodoReducer,
+  user: UserReducer,
 });

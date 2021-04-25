@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Text, View, ScrollView, SafeAreaView, Image } from "react-native";
+import {
+  Text,
+  View,
+  ScrollView,
+  SafeAreaView,
+  Image,
+  Keyboard,
+} from "react-native";
 
 // styles
 import styles from "../../styles";
@@ -21,22 +28,51 @@ function UserScreen({ route, navigation }) {
   const item = route?.params?.item;
 
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.todo);
-  const listUser = user.user;
-  console.log(listUser);
+  const userState = useSelector((state) => state.user);
+  const userData = userState.user;
 
-  const [userNameInput, setUserNameInput] = useState(listUser.userName);
+  const [userNameInput, setUserNameInput] = useState(userData?.userName);
+  const [userEmail, setUserEmail] = useState(userData?.email);
+  const [userPhone, setUserPhone] = useState(userData?.phone);
+  const [userGender, setUserGender] = useState(userData?.gender);
+  const [userDoB, setUserDoB] = useState(userData?.birthday);
+
   const onChangeTextUserName = (text) => {
     setUserNameInput(text);
+  };
+
+  const onChangeTextEmai = (text) => {
+    setUserEmail(text);
+  };
+
+  const onChangeTextPhone = (text) => {
+    setUserPhone(text);
+  };
+
+  const onChangeTextGender = (text) => {
+    setUserGender(text);
+  };
+
+  const onChangeTextDoB = (text) => {
+    setUserDoB(text);
   };
 
   const onPressBack = () => {
     navigation.goBack();
   };
 
-  const onPressMove = () => {
-    dispatch(editUser({ listUser, userName: userNameInput }));
-    navigation.navigate("UserDescription");
+  const onPressSave = () => {
+    const userData = {
+      userNameInput,
+      userEmail,
+      userPhone,
+      userGender,
+      userDoB,
+    };
+
+    Keyboard.dismiss();
+    dispatch(editUser({ editUserData: userData }));
+    navigation.goBack();
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -48,7 +84,7 @@ function UserScreen({ route, navigation }) {
           titleStyle={styles.titleheaderAddNewTask}
           leftIconPress={onPressBack}
           leftIconSource={Images.back}
-          rightIconPress={onPressMove}
+          rightIconPress={onPressSave}
         />
         <View
           style={{
@@ -83,34 +119,34 @@ function UserScreen({ route, navigation }) {
         </View>
         <View style={{ backgroundColor: "green" }}>
           <TDTextInput
-            placeholder={listUser.userName}
+            placeholder={"Nhap ten di"}
             title={"User name"}
             onChangeText={(text) => onChangeTextUserName(text)}
             value={userNameInput}
           />
           <TDTextInput
-            placeholder={listUser.email}
+            placeholder={"nhap email di"}
             title={"Email"}
-            // onChangeText={(text) => onChangeTextUserName(text)}
-            // value={userNameInput}
+            onChangeText={(text) => onChangeTextEmai(text)}
+            value={userEmail}
           />
           <TDTextInput
-            placeholder={listUser.phone}
+            placeholder={"nhap phone do"}
             title={"Phone"}
-            // onChangeText={(text) => onChangeTextUserName(text)}
-            // value={userNameInput}
+            onChangeText={(text) => onChangeTextPhone(text)}
+            value={userPhone}
           />
           <TDTextInput
-            placeholder={listUser.gender}
+            placeholder={"gioi tinh la gi"}
             title={"Gender"}
-            // onChangeText={(text) => onChangeTextUserName(text)}
-            // value={userNameInput}
+            onChangeText={(text) => onChangeTextGender(text)}
+            value={userGender}
           />
           <TDTextInput
-            placeholder={listUser.birthday}
+            placeholder={"ngay sinh"}
             title={"Birthday"}
-            // onChangeText={(text) => onChangeTextUserName(text)}
-            // value={userNameInput}
+            onChangeText={(text) => onChangeTextDoB(text)}
+            value={userDoB}
           />
         </View>
       </ScrollView>
