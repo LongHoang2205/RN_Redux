@@ -1,4 +1,4 @@
-import { ADD_TODO, REMOVE_TODO, EDIT_TODO, USER } from "./type";
+import { ADD_TODO, REMOVE_TODO, EDIT_TODO, USER, EDIT_USER } from "./type";
 
 export const addTodo = (payload) => ({
   type: ADD_TODO,
@@ -17,5 +17,9 @@ export const editTodo = (payload) => ({
 
 export const user = (payload) => ({
   type: USER,
+  payload,
+});
+export const editUser = (payload) => ({
+  type: EDIT_USER,
   payload,
 });

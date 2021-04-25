@@ -11,6 +11,7 @@ import store from "./Apps/Redux/Store/store";
 import HomeTodoScreen from "./Apps/Containers/HomeTodoScreen";
 import AddTodoScreen from "./Apps/Containers/AddTodoScreen/AddTodoScreen";
 import UserScreen from "./Apps/Containers/UserScreen";
+import UserDescription from "./Apps/Containers/UserDescripton";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -27,6 +28,7 @@ function HomeStacks() {
       <HomeStack.Screen name="HomeTodoScreen" component={HomeTodoScreen} />
       <HomeStack.Screen name="AddTodoScreen" component={AddTodoScreen} />
       <HomeStack.Screen name="UserScreen" component={UserScreen} />
+      <HomeStack.Screen name="UserDescription" component={UserDescription} />
     </HomeStack.Navigator>
   );
 }

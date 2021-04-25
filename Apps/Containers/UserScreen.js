@@ -9,7 +9,7 @@ import { TDTextInput, TDHeader, TDIconButton } from "../Components";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { addTodo, editTodo } from "../Redux/Actions/index";
+import { editUser } from "../Redux/Actions/index";
 
 // themes
 import { Images, Colors, Metrics } from "../Themes";
@@ -21,38 +21,34 @@ function UserScreen({ route, navigation }) {
   const item = route?.params?.item;
 
   const dispatch = useDispatch();
-  const addTodoState = useSelector((state) => state);
-  const [userNameInput, setUserNameInput] = useState(
-    titleHeader ? item.taskName : ""
-  );
-  const [descriptionInput, setDescriptionInput] = useState(
-    titleHeader ? item.description : ""
-  );
+  const user = useSelector((state) => state.todo);
+  const listUser = user.user;
+  console.log(listUser);
 
+  const [userNameInput, setUserNameInput] = useState(listUser.userName);
   const onChangeTextUserName = (text) => {
     setUserNameInput(text);
-  };
-
-  const onChangeTextDescription = (text) => {
-    setDescriptionInput(text);
   };
 
   const onPressBack = () => {
     navigation.goBack();
   };
 
+  const onPressMove = () => {
+    dispatch(editUser({ listUser, userName: userNameInput }));
+    navigation.navigate("UserDescription");
+  };
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.contentContainer}>
         <TDHeader
           title={"Edit Profile"}
-          rightIconPress={() => {
-            alert("save");
-          }}
+          rightIconPress={() => {}}
           rightIconSource={titleHeader ? Images.save : Images.add}
           titleStyle={styles.titleheaderAddNewTask}
           leftIconPress={onPressBack}
           leftIconSource={Images.back}
+          rightIconPress={onPressMove}
         />
         <View
           style={{
@@ -87,34 +83,34 @@ function UserScreen({ route, navigation }) {
         </View>
         <View style={{ backgroundColor: "green" }}>
           <TDTextInput
-            placeholder={"Hoang Vu Long"}
+            placeholder={listUser.userName}
             title={"User name"}
             onChangeText={(text) => onChangeTextUserName(text)}
             value={userNameInput}
           />
           <TDTextInput
-            placeholder={"@gmail.com"}
+            placeholder={listUser.email}
             title={"Email"}
-            onChangeText={(text) => onChangeTextUserName(text)}
-            value={userNameInput}
+            // onChangeText={(text) => onChangeTextUserName(text)}
+            // value={userNameInput}
           />
           <TDTextInput
-            placeholder={"0xxxxxxxxx"}
+            placeholder={listUser.phone}
             title={"Phone"}
-            onChangeText={(text) => onChangeTextUserName(text)}
-            value={userNameInput}
+            // onChangeText={(text) => onChangeTextUserName(text)}
+            // value={userNameInput}
           />
           <TDTextInput
-            placeholder={"Male"}
+            placeholder={listUser.gender}
             title={"Gender"}
-            onChangeText={(text) => onChangeTextUserName(text)}
-            value={userNameInput}
+            // onChangeText={(text) => onChangeTextUserName(text)}
+            // value={userNameInput}
           />
           <TDTextInput
-            placeholder={"dd-mm-yyyy"}
+            placeholder={listUser.birthday}
             title={"Birthday"}
-            onChangeText={(text) => onChangeTextUserName(text)}
-            value={userNameInput}
+            // onChangeText={(text) => onChangeTextUserName(text)}
+            // value={userNameInput}
           />
         </View>
       </ScrollView>
