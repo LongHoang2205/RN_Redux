@@ -14,7 +14,6 @@ export default StyleSheet.create({
     fontWeight: "bold",
   },
   input: {
-    borderBottomWidth: 1,
     borderColor: Colors.white,
     height: 50,
     backgroundColor: Colors.pinkLight,

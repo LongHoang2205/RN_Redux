@@ -5,3 +5,6 @@ export const EDIT_TODO = "EDIT_TODO";
 
 // users
 export const EDIT_USER = "EDIT_USER";
+
+//message
+export const MESSAGE = "MESSAGE";

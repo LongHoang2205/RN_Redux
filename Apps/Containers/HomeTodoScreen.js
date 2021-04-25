@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  SafeAreaView,
-  FlatList,
-  Platform,
-  StatusBar,
-} from "react-native";
+import { View, SafeAreaView, FlatList, Text } from "react-native";
 
 // styles
 import styles from "../../styles";
@@ -40,6 +34,9 @@ function Todo({ navigation }) {
   const onPressMoveUser = (item) => {
     navigation.navigate("UserScreen", { title: "User Profile", item });
   };
+  const onPressMoveToMessage = () => {
+    navigation.navigate("MessageScreen");
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.contentContainer}>
@@ -60,6 +57,21 @@ function Todo({ navigation }) {
           keyExtractor={(item, index) => item.id + index}
           style={styles.listContainer}
         />
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <TDIconButton
+          imgSource={Images.message}
+          onPressButton={onPressMoveToMessage}
+        />
+        <View style={{ justifyContent: "center" }}>
+          <Text>Go to Message</Text>
+        </View>
       </View>
     </SafeAreaView>
   );

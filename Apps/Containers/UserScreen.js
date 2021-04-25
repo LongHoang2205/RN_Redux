@@ -9,7 +9,7 @@ import {
 } from "react-native";
 
 // styles
-import styles from "../../styles";
+import styles from "../Containers/UserStyle";
 
 // components
 import { TDTextInput, TDHeader, TDIconButton } from "../Components";
@@ -78,6 +78,7 @@ function UserScreen({ route, navigation }) {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.contentContainer}>
         <TDHeader
+          headerContainer={styles.headerContainer}
           title={"Edit Profile"}
           rightIconPress={() => {}}
           rightIconSource={titleHeader ? Images.save : Images.add}
@@ -85,6 +86,7 @@ function UserScreen({ route, navigation }) {
           leftIconPress={onPressBack}
           leftIconSource={Images.back}
           rightIconPress={onPressSave}
+          iconStyle={{ tintColor: "white" }}
         />
         <View
           style={{
@@ -95,58 +97,77 @@ function UserScreen({ route, navigation }) {
         >
           <View>
             <Image
-              source={require("../Images/icons/user.png")}
-              style={{ width: 100, height: 100 }}
+              source={{
+                uri:
+                  "https://afamilycdn.com/150157425591193600/2020/6/17/10412201938741747726524279144254310954691829o-15923704404661764223890-1592379481982-159237948209593938679.jpg",
+              }}
+              style={{ width: 100, height: 100, borderRadius: 50 }}
             />
             <View
               style={{
                 position: "absolute",
                 bottom: 0,
                 right: 0,
+                backgroundColor: "red",
+                borderRadius: 20,
               }}
             >
-              <TouchableOpacity>
+              <TouchableOpacity
+                style={{ width: 40, height: 40, justifyContent: "center" }}
+              >
                 <Image
-                  source={require("../Images/icons/user.png")}
+                  source={require("../Images/icons/camera.png")}
                   style={{
-                    width: 40,
-                    height: 40,
+                    width: 20,
+                    height: 20,
+                    alignSelf: "center",
+                    tintColor: "white",
                   }}
                 />
               </TouchableOpacity>
             </View>
           </View>
         </View>
-        <View style={{ backgroundColor: "green" }}>
+        <View style={{ backgroundColor: "white" }}>
           <TDTextInput
             placeholder={"Nhap ten di"}
             title={"User name"}
             onChangeText={(text) => onChangeTextUserName(text)}
             value={userNameInput}
+            inputStyle={styles.inputStyle}
+            textInputStyle={styles.textInputStyle}
           />
           <TDTextInput
             placeholder={"nhap email di"}
             title={"Email"}
             onChangeText={(text) => onChangeTextEmai(text)}
             value={userEmail}
+            inputStyle={styles.inputStyle}
+            textInputStyle={styles.textInputStyle}
           />
           <TDTextInput
             placeholder={"nhap phone do"}
             title={"Phone"}
             onChangeText={(text) => onChangeTextPhone(text)}
             value={userPhone}
+            inputStyle={styles.inputStyle}
+            textInputStyle={styles.textInputStyle}
           />
           <TDTextInput
             placeholder={"gioi tinh la gi"}
             title={"Gender"}
             onChangeText={(text) => onChangeTextGender(text)}
             value={userGender}
+            inputStyle={styles.inputStyle}
+            textInputStyle={styles.textInputStyle}
           />
           <TDTextInput
             placeholder={"ngay sinh"}
             title={"Birthday"}
             onChangeText={(text) => onChangeTextDoB(text)}
             value={userDoB}
+            inputStyle={styles.inputStyle}
+            textInputStyle={styles.textInputStyle}
           />
         </View>
       </ScrollView>
