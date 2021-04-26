@@ -62,23 +62,28 @@ export default function (messages = initialState, action) {
       //const userNameEdit = action.payload.itemPicked.username;
       const messageEdit = action.payload.messageContent;
       console.log("day la message:", action.payload.messageContent);
-      const editMapList = newMessage.map((itemPicked) => {
-        if (itemPicked.id === messageIdEdit) {
+
+      // đoạn này làm đúng rồi không có gì sai cả
+      // cái item lúc map cái mảng đó là đại diện cho mỗi item trong hàm
+      // không phải là item picked nên không đặt tên itemPicked.
+      const editMapList = newMessage.map((item) => {
+        if (item.id === messageIdEdit) {
           return {
-            ...itemPicked,
+            // ...itemPicked => đoạn này phải sử a lại cả nội dung của itempicked mình truyền vào mới đúng
+            // có thể hiểu là vì mình sửa item cũ => trong đoạn này thì lấy tất cả của thằng cũ,
+            ////////// sửa lại id (không cần sửa lại id, nhưng không sai đoạn này vì truyền vào vẫn là id cũ), và message content
+            ...action.payload.itemPicked,
             id: messageIdEdit,
-            // username: userNameEdit,
             messageContent: messageEdit,
           };
         } else {
-          return itemPicked;
+          return item;
         }
       });
-      console.log("edit message ne:", editMapList);
       return {
-        messages: editMapList,
+        // messages: editMapList, => đoạn này sai vì khi mà đã tạo ra mảng mới thì phải gán vào message.addMessage chớ không phải gán vào message
+        addMessage: editMapList,
       };
-
     default:
       return messages;
   }
