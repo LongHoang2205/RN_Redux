@@ -14,7 +14,11 @@ import { TDTextInput, TDHeader, TDIconButton } from "../../Components";
 import TDIconButtonStyle from "../../Components/TDButton/TDIconButton/Styles/TDIconButtonStyle";
 import { TDMessageListItem } from "../../Components/TDMessageList.js/index.js";
 
-import { addMessage, editMessage } from "../../Redux/Actions/index";
+import {
+  addMessage,
+  editMessage,
+  removeMessage,
+} from "../../Redux/Actions/index";
 //styles
 import styles from "./Styles/MessageStyle";
 
@@ -33,13 +37,15 @@ function MessageScreen({ navigation, route }) {
   const [message, setMessage] = useState(messageData?.messageContent);
   const [isEditMessage, setIsEditMessage] = useState(false);
 
+  const [itemPicked, setitemPicked] = useState(null);
+
   const onChangeMessage = (text) => {
     setMessage(text);
   };
 
   const onPressSend = () => {
     if (isEditMessage) {
-      dispatch(editMessage({ messageData, messageContent: message }));
+      dispatch(editMessage({ itemPicked, messageContent: message }));
     } else {
       dispatch(addMessage({ messageContent: message }));
     }
@@ -49,6 +55,7 @@ function MessageScreen({ navigation, route }) {
     // console.log(item);
     setIsEditMessage(true);
     setMessage(item.messageContent);
+    setitemPicked(item);
   };
 
   const onPressRightHeaderIcon = () => {
@@ -60,6 +67,10 @@ function MessageScreen({ navigation, route }) {
 
   const onPressBack = () => {
     navigation.goBack();
+  };
+
+  const onPressDelete = (item) => {
+    dispatch(removeMessage({ item }));
   };
 
   return (
@@ -102,7 +113,7 @@ function MessageScreen({ navigation, route }) {
         <FlatList
           data={messageData}
           renderItem={({ item, index }) =>
-            TDMessageListItem(item, index, onPressItem)
+            TDMessageListItem(item, index, onPressItem, onPressDelete)
           }
           keyExtractor={(item, index) => item.id + index}
         />
@@ -124,7 +135,9 @@ function MessageScreen({ navigation, route }) {
           />
         </View>
         <View style={styles.rightFooter}>
-          <TDIconButton imgSource={Images.micro} />
+          <TDIconButton
+            imgSource={isEditMessage ? Images.delete : Images.micro}
+          />
         </View>
       </View>
     </SafeAreaView>

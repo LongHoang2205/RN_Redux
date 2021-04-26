@@ -19,6 +19,7 @@ export default function (tasks = initialState, action) {
         tasks: newTask,
       };
     case REMOVE_TODO:
+      console.log("remove todo:", action.payload);
       const removeId = action.payload.item.id;
       const removeTodoList = newTask.filter((x) => {
         if (x.id !== removeId) {
@@ -29,10 +30,11 @@ export default function (tasks = initialState, action) {
         tasks: removeTodoList,
       };
     case EDIT_TODO:
-      console.log("edit todo", action.payload);
+      // console.log("edit todo", action.payload);
       const itemIdEdit = action.payload.item.id;
       const taskNameEdit = action.payload.taskName;
       const descriptionEdit = action.payload.description;
+      console.log("day la item:", action.payload.item);
       const editMapList = newTask.map((item) => {
         if (item.id === itemIdEdit) {
           return {
@@ -44,9 +46,11 @@ export default function (tasks = initialState, action) {
           return item;
         }
       });
+      console.log("edit map ne:", editMapList);
       return {
         tasks: editMapList,
       };
+
     default:
       return tasks;
   }

@@ -10,7 +10,13 @@ import { Images, Colors } from "../../Themes";
 // comonents
 import { TDIconButton } from "../TDButton";
 
-function TDMessageListItem(item, index, onPressItem, onPressUpdate) {
+function TDMessageListItem(
+  item,
+  index,
+  onPressItem,
+  onPressDelete,
+  onPressUpdate
+) {
   const userName = item?.username;
   return userName === "me" ? (
     <TouchableOpacity
@@ -41,6 +47,10 @@ function TDMessageListItem(item, index, onPressItem, onPressUpdate) {
       }}
     >
       <Text>{item.messageContent}</Text>
+      <TDIconButton
+        imgSource={Images.delete}
+        onPressButton={() => onPressDelete(item)}
+      />
     </TouchableOpacity>
   );
 }

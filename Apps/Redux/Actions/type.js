@@ -9,3 +9,4 @@ export const EDIT_USER = "EDIT_USER";
 //message
 export const ADD_MESSAGE = "ADD_MESSAGE";
 export const EDIT_MESSAGE = "EDIT_MESSAGE";
+export const REMOVE_MESSAGE = "REMOVE_MESSAGE";
