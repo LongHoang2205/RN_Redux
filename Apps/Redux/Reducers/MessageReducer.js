@@ -44,15 +44,17 @@ export default function (messages = initialState, action) {
         addMessage: newMessage,
       };
     case REMOVE_MESSAGE:
-      console.log("day la action remove:", action.payload);
-      const removeId = action.payload.item.id;
+      console.log("day la action remove:", action.payload.itemPicked.id);
+      const removeId = action.payload.itemPicked.id;
       const removeMessageList = newMessage.filter((x) => {
         if (x.id !== removeId) {
-          return x;
+          return {
+            x,
+          };
         }
       });
       return {
-        messages: removeMessageList,
+        addMessage: removeMessageList,
       };
     case EDIT_MESSAGE:
       console.log("day la action edit message:", action.payload);
@@ -81,7 +83,8 @@ export default function (messages = initialState, action) {
         }
       });
       return {
-        // messages: editMapList, => đoạn này sai vì khi mà đã tạo ra mảng mới thì phải gán vào message.addMessage chớ không phải gán vào message
+        // messages: editMapList, => đoạn này sai vì khi mà đã tạo ra mảng mới
+        //thì phải gán vào message.addMessage chớ không phải gán vào message
         addMessage: editMapList,
       };
     default:

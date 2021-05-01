@@ -70,7 +70,9 @@ function MessageScreen({ navigation, route }) {
   };
 
   const onPressDelete = (item) => {
-    dispatch(removeMessage({ item }));
+    setIsEditMessage(true);
+    setitemPicked(item);
+    dispatch(removeMessage({ itemPicked }));
   };
 
   return (
